@@ -39,11 +39,12 @@
         </CompilerOptions>
       </Item1>
     </BuildModes>
-    <Units Count="4">
+    <Units Count="5">
       <Unit0>
         <Filename Value="NTDSEXTRACT.lpr"/>
         <IsPartOfProject Value="True"/>
-        <CursorPos X="37" Y="20"/>
+        <IsVisibleTab Value="True"/>
+        <CursorPos X="70" Y="24"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -57,10 +58,8 @@
       <Unit2>
         <Filename Value="ntds.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="379"/>
-        <CursorPos X="5" Y="388"/>
+        <CursorPos X="65" Y="386"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -68,15 +67,33 @@
       <Unit3>
         <Filename Value="utils.pas"/>
         <IsPartOfProject Value="True"/>
+        <EditorIndex Value="2"/>
         <UsageCount Value="20"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit3>
+      <Unit4>
+        <Filename Value="..\jwa\branches\2.3\Win32API\JwaNative.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="8863"/>
+        <CursorPos X="25" Y="8876"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit4>
     </Units>
-    <JumpHistory Count="1">
+    <JumpHistory Count="3" HistoryIndex="2">
       <Position1>
         <Filename Value="NTDSEXTRACT.lpr"/>
         <Caret Line="20" Column="37"/>
       </Position1>
+      <Position2>
+        <Filename Value="ntds.pas"/>
+        <Caret Line="386" Column="65"/>
+      </Position2>
+      <Position3>
+        <Filename Value="NTDSEXTRACT.lpr"/>
+        <Caret Line="24" Column="70"/>
+      </Position3>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

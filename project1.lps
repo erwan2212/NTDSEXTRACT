@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="10"/>
+    <BuildModes Active="Default"/>
+    <Units Count="8">
+      <Unit0>
+        <Filename Value="project1.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <TopLine Value="116"/>
+        <CursorPos X="10" Y="41"/>
+        <UsageCount Value="176"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="esent.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="3"/>
+        <CursorPos X="29" Y="173"/>
+        <UsageCount Value="176"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="ntds.pas"/>
+        <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="376"/>
+        <CursorPos X="34" Y="388"/>
+        <UsageCount Value="163"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="utils.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="1"/>
+        <CursorPos X="42" Y="261"/>
+        <UsageCount Value="157"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="..\jwa\branches\2.3\Win32API\JwaNative.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="8916"/>
+        <CursorPos X="24" Y="8921"/>
+        <UsageCount Value="9"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="..\jwa\branches\2.3\Win32API\JwaWinCrypt.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1113"/>
+        <CursorPos X="22" Y="1120"/>
+        <UsageCount Value="54"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="C:\FPC\3.0.0\source\rtl\objpas\sysutils\sysutilh.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="92"/>
+        <CursorPos X="4" Y="104"/>
+        <UsageCount Value="29"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="C:\FPC\3.0.0\source\rtl\objpas\math.pp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="609"/>
+        <CursorPos X="76" Y="621"/>
+        <UsageCount Value="10"/>
+      </Unit7>
+    </Units>
+    <JumpHistory Count="28" HistoryIndex="27">
+      <Position1>
+        <Filename Value="project1.lpr"/>
+        <Caret Line="190" Column="9" TopLine="175"/>
+      </Position1>
+      <Position2>
+        <Filename Value="project1.lpr"/>
+        <Caret Line="139" Column="21" TopLine="116"/>
+      </Position2>
+      <Position3>
+        <Filename Value="project1.lpr"/>
+        <Caret Line="135" Column="13" TopLine="123"/>
+      </Position3>
+      <Position4>
+        <Filename Value="project1.lpr"/>
+        <Caret Line="102" Column="34" TopLine="93"/>
+      </Position4>
+      <Position5>
+        <Filename Value="esent.pas"/>
+        <Caret Line="183" Column="19" TopLine="171"/>
+      </Position5>
+      <Position6>
+        <Filename Value="esent.pas"/>
+        <Caret Line="212" Column="46" TopLine="200"/>
+      </Position6>
+      <Position7>
+        <Filename Value="esent.pas"/>
+        <Caret Line="216" TopLine="204"/>
+      </Position7>
+      <Position8>
+        <Filename Value="esent.pas"/>
+        <Caret Line="185" Column="101" TopLine="167"/>
+      </Position8>
+      <Position9>
+        <Filename Value="esent.pas"/>
+        <Caret Line="10" Column="6"/>
+      </Position9>
+      <Position10>
+        <Filename Value="esent.pas"/>
+        <Caret Line="7" Column="15"/>
+      </Position10>
+      <Position11>
+        <Filename Value="esent.pas"/>
+        <Caret Line="206" Column="53" TopLine="193"/>
+      </Position11>
+      <Position12>
+        <Filename Value="esent.pas"/>
+        <Caret Line="164" Column="18" TopLine="141"/>
+      </Position12>
+      <Position13>
+        <Filename Value="project1.lpr"/>
+        <Caret Line="76" Column="23" TopLine="65"/>
+      </Position13>
+      <Position14>
+        <Filename Value="project1.lpr"/>
+        <Caret Line="180" Column="23" TopLine="169"/>
+      </Position14>
+      <Position15>
+        <Filename Value="project1.lpr"/>
+        <Caret Line="302" Column="31" TopLine="296"/>
+      </Position15>
+      <Position16>
+        <Filename Value="project1.lpr"/>
+        <Caret Line="336" Column="22" TopLine="318"/>
+      </Position16>
+      <Position17>
+        <Filename Value="esent.pas"/>
+        <Caret Line="201" Column="73" TopLine="185"/>
+      </Position17>
+      <Position18>
+        <Filename Value="project1.lpr"/>
+        <Caret Line="391" Column="18" TopLine="379"/>
+      </Position18>
+      <Position19>
+        <Filename Value="project1.lpr"/>
+        <Caret Line="387" Column="8" TopLine="375"/>
+      </Position19>
+      <Position20>
+        <Filename Value="project1.lpr"/>
+        <Caret Line="380" Column="8" TopLine="368"/>
+      </Position20>
+      <Position21>
+        <Filename Value="project1.lpr"/>
+        <Caret Line="420" Column="2" TopLine="402"/>
+      </Position21>
+      <Position22>
+        <Filename Value="project1.lpr"/>
+        <Caret Line="419" TopLine="404"/>
+      </Position22>
+      <Position23>
+        <Filename Value="project1.lpr"/>
+        <Caret Line="391" Column="33" TopLine="380"/>
+      </Position23>
+      <Position24>
+        <Filename Value="project1.lpr"/>
+        <Caret Line="419" Column="23" TopLine="378"/>
+      </Position24>
+      <Position25>
+        <Filename Value="project1.lpr"/>
+        <Caret Line="203" Column="52" TopLine="191"/>
+      </Position25>
+      <Position26>
+        <Filename Value="ntds.pas"/>
+        <Caret Line="121" Column="26" TopLine="102"/>
+      </Position26>
+      <Position27>
+        <Filename Value="ntds.pas"/>
+        <Caret Line="120" Column="11" TopLine="108"/>
+      </Position27>
+      <Position28>
+        <Filename Value="ntds.pas"/>
+        <Caret Line="403" Column="11" TopLine="389"/>
+      </Position28>
+    </JumpHistory>
+  </ProjectSession>
+</CONFIG>
