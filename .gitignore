@@ -1,0 +1,6 @@
+*.bak
+backup*
+lib*
+*.dit
+system
+security
