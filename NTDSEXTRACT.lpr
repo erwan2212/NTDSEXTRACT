@@ -1,6 +1,8 @@
 //dump with powershell "ntdsutil.exe 'ac i ntds' 'ifm' 'create full c:\temp' q q"
 //on win10 if esentutl fails with callback error:
 //Enable-WindowsOptionalFeature -FeatureName ‘DirectoryServices-ADAM-Client’ -Online
+
+//compilation optimization level >1 will mess up results ???
 program project1;
 
 uses windows, sysutils, math, esent, JwaWinCrypt, jwanative,ntds, utils{,jwawintype,jwabcrypt};

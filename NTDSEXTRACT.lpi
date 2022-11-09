@@ -70,6 +70,7 @@
       <Unit0>
         <Filename Value="NTDSEXTRACT.lpr"/>
         <IsPartOfProject Value="True"/>
+        <UnitName Value="project1"/>
       </Unit0>
       <Unit1>
         <Filename Value="esent.pas"/>

@@ -26,9 +26,6 @@
             <SmartLinkUnit Value="True"/>
             <TargetCPU Value="x86_64"/>
             <TargetOS Value="win64"/>
-            <Optimizations>
-              <OptimizationLevel Value="3"/>
-            </Optimizations>
           </CodeGeneration>
           <Linking>
             <Debugging>
@@ -43,8 +40,9 @@
       <Unit0>
         <Filename Value="NTDSEXTRACT.lpr"/>
         <IsPartOfProject Value="True"/>
+        <UnitName Value="project1"/>
         <IsVisibleTab Value="True"/>
-        <CursorPos X="70" Y="24"/>
+        <CursorPos X="49" Y="5"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
