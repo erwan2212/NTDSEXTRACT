@@ -2,6 +2,8 @@
 //on win10 if esentutl fails with callback error:
 //Enable-WindowsOptionalFeature -FeatureName ‘DirectoryServices-ADAM-Client’ -Online
 
+//{$OPTIMIZATION LEVEL1}
+
 //compilation optimization level >1 will mess up results ???
 program project1;
 
@@ -11,7 +13,6 @@ function ConvertSidToStringSidA(SID: PSID; var StringSid: pchar): Boolean; stdca
     external 'advapi32.dll';// name 'ConvertSidToStringSidA';
 
 var
-columns:array of COLUMN_INFO;
 syskey:tbytes;
 
 
@@ -19,24 +20,6 @@ const
   dummy=0;
   //should be retrieved from system or given on the command line
   //syskey :array[0..SYSTEM_KEY_LEN-1] of byte= ( $2e,$24,$1b,$23,$bb,$27,$af,$6c,$ef,$7f,$e7,$d6,$d7,$a9,$66,$64);
-
-function GetColumnId(uAttrId:ULONG):ulong;
-var
-Id:ULONG = 0;
-i:integer;
-begin
-  for i := 0 to length(columns)-1 do
-    begin
-    if (uAttrId = columns[i].uAttrId) then
-      begin
-      Id := columns[i].uColumnId;
-      break;
-      end;
-  end;
-  result:=Id;
-end;
-
-
 
 // *  + Obtain user attributes
 // *  + Decrypt hashes
@@ -101,10 +84,20 @@ begin
 
     if GetColumnData(sidId, @sid[0], sizeof(sid))>0 then
       begin
+      //sid is 28 bytes - rid is last 4 bytes
+      //0105000000000005150000003FADD23FBA8E8B45A733778C 000001F4
+      //dumphex('rid',@sid[24],4);
+      copymemory(@rid,@sid[24],4);
+      rid:=ByteSwap32 (rid);
+      //writeln('rid:'+inttostr(rid));
+      {
+      //the below is messed up with optmimization level >1
       dwCount := GetSidSubAuthorityCount(@sid[0])^;
       rid := GetSidSubAuthority(@sid[0], dwCount - 1)^;
       rid := RtlUlongByteSwap(rid);
-      ConvertSidToStringSidA(@sid[0] ,stringsid);
+      //writeln('rid:'+inttostr(rid));
+      }
+      //ConvertSidToStringSidA(@sid[0] ,stringsid);
       //if length(strpas(stringsid))>=32 then
       if dwUserCtrl>0 then
             begin

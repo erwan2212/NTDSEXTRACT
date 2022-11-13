@@ -2,10 +2,12 @@
 //https://github.com/danmar/clang-headers/blob/master/esent.h
 //https://github.com/leecher1337/jetiisam/blob/master/esent.h
 
+//{$OPTIMIZATION LEVEL1}
+
 unit esent;
 
 //{$mode objfpc}{$H+}
-{$mode delphi}
+//{$mode delphi}
 
 interface
 
@@ -105,6 +107,7 @@ PCOLUMN_INFO=^COLUMN_INFO;
 
 
 function GetColumnData(columnId:ULONG; pbBuffer:PVOID; cbBufSize:DWORD):DWORD ;
+function GetColumnId(uAttrId:ULONG):ulong;
 Function JetErrorMessage(error_code:JET_API ):string;
 
 
@@ -115,6 +118,8 @@ var
     psesid:JET_SESID=0 ;
     pdbid:JET_DBID=0 ;
     ptable_id:JET_TABLEID=0 ;
+    //
+    columns:array of COLUMN_INFO;
     //
     JetCreateInstanceA:Function(var pinstance:JET_INSTANCE;szInstanceName : pchar) : JET_API; stdcall;
     JetInit:Function(var pinstance:JET_INSTANCE): JET_API; stdcall;
@@ -137,6 +142,22 @@ implementation
 
 var
  lib: THandle = 0;
+
+function GetColumnId(uAttrId:ULONG):ulong;
+var
+Id:ULONG = 0;
+i:integer;
+begin
+  for i := 0 to length(columns)-1 do
+    begin
+    if (uAttrId = columns[i].uAttrId) then
+      begin
+      Id := columns[i].uColumnId;
+      break;
+      end;
+  end;
+  result:=Id;
+end;
 
 function GetColumnData(columnId:ULONG; pbBuffer:PVOID; cbBufSize:DWORD):DWORD ;
 var

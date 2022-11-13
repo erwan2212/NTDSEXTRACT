@@ -1,9 +1,11 @@
 //https://github.com/mubix/ntds_decode/blob/master/ntds.cpp
 //https://github.com/zcgonvh/NTDSDumpEx/blob/master/NTDSDumpEx/ntds.cpp
 
+//{$OPTIMIZATION LEVEL1}
+
 unit ntds;
 
-{$mode delphi}
+//{$mode delphi}
 
 interface
 
@@ -275,10 +277,11 @@ begin
         //# Key1 is a concatenation of the following values: I[0], I[1], I[2], I[3], I[0], I[1], I[2].
         //# Key2 is a concatenation of the following values: I[3], I[0], I[1], I[2], I[3], I[0], I[1]
         //key = pack('<L',baseKey)
-        basekey := {ByteSwap32} (basekey); //we swapped it already !
-        fillchar(key,sizeof(key),0);
-        copymemory(@key[0],@basekey,4);
+        //basekey := {ByteSwap32} (basekey); //we swapped it already !
+        fillchar(key,4,0);
+        copymemory(@key[0],@basekey,sizeof(dword));
 
+        //dumphex('basekey',@basekey,sizeof(basekey));
         //dumphex('key',@key[0],sizeof(key));
 
         setlength(key1,7);
@@ -322,6 +325,7 @@ begin
     fillchar(Blob1,sizeof(DES_KEY_BLOB),0);
     fillchar(Blob2,sizeof(DES_KEY_BLOB),0);
     // initialize keys
+    //dumphex('rid',@rid,sizeof(rid));
     deriveKey (rid,@Blob1.rgbKeyData[0], @Blob2.rgbKeyData[0]);
 
 
@@ -390,6 +394,7 @@ begin
   //dumphex('pSecret.pbData',@pSecret.pbData[0],sizeof(pSecret.pbData));
 
   //layer 3 remove the DES encryption layer - using pSecret.pbData from layer 2
+  //dumphex('rid',@rid,sizeof(rid));
   decryptHash(rid, @pSecret.pbData[offset], @hash[0]);
   //verified OK
   //dumphex('pSecret.pbData',@hash[0],sizeof(hash));
@@ -403,6 +408,8 @@ end;
 procedure DumpHash(rid:DWORD; pbHash:PBYTE;dwlen:dword);
 begin
   try
+  //dumphex('',pbhash,dwlen,true) ;
+  //dumphex('rid',@rid,sizeof(rid));
   DecryptSecret(rid, pbHash,dwlen);
 
   //dumphex('pbhash',@pbhash[0],16) ;

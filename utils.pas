@@ -1,6 +1,7 @@
 unit utils;
 
-{$mode delphi}
+//{$mode delphi}
+//{$OPTIMIZATION LEVEL1}
 
 interface
 
