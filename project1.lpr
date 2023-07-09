@@ -51,6 +51,9 @@ var
   stringsid:pchar;
   c:byte;
   dwlen:dword;
+  //
+  F: TextFile;
+  userPassword:string;
 begin
   result:=false;
   // get column ids corresponding to user attributes
@@ -79,6 +82,10 @@ begin
 
   if (err <> JET_errSuccess) then exit;
 
+  //
+  AssignFile(F, 'import.ldif');
+  Rewrite(F);
+  //
 
   // go to first row
   err := JetMove(psesid, ptable_id, JET_MoveFirst, JET_bitNil);
@@ -138,9 +145,20 @@ begin
             write(':');
             dumphex('',@lmHash[0],16,false);
             write(':');
-            dumphex('',@ntHash[0],16,false);
+            userpassword:=dumphex('',@ntHash[0],16,false);
             write(':::');
             writeln;
+            try
+            WriteLn(F, 'dn: uid='+strpas(samname)+',ou=users,dc=domain,dc=com');
+            WriteLn(F, 'changetype: add');
+            WriteLn(F, 'objectClass: inetOrgPerson');
+            WriteLn(F, 'cn: '+strpas(samname));
+            WriteLn(F, 'sn: '+strpas(samname));
+            WriteLn(F, 'uid: '+strpas(samname));
+            WriteLn(F, 'userPassword: '+userpassword);
+            WriteLn(F, '');
+            except
+            end;
             end;
       end;
 
@@ -149,6 +167,8 @@ begin
     if JetMove(psesid, ptable_id, JET_MoveNext, JET_bitNil) <> JET_errSuccess then break;
     end;
 
+  //
+  {$i-}CloseFile(F);{$i+}
   // close table
   err := JetCloseTable(psesid, ptable_id);
 
@@ -242,7 +262,7 @@ begin
           @pekList.Hdr.bSalt[0], PEK_SALT_LEN,
           @pekList.Data, dwPekListSize - sizeof(PEK_HDR));
       }
-      DecryptAes(pbSysKey, SYSTEM_KEY_LEN,
+      DecryptAes128(pbSysKey, SYSTEM_KEY_LEN,
           @output[8], PEK_SALT_LEN,
           @output[24], dwPekListSize - sizeof(PEK_HDR));
       //dumphex('data after',@output[24],dwPekListSize - sizeof(PEK_HDR));

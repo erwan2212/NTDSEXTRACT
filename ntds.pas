@@ -115,13 +115,13 @@ function EncryptDecryptWithKey(pbKey:PBYTE; dwKeyLen:DWORD;
   pbSalt:PBYTE; dwSaltLen:DWORD; dwSaltRounds:DWORD;
   pbData:PBYTE; dwDataLen:DWORD):boolean;
 
-function DecryptAes(pbKey:PBYTE;dwKeyLen:DWORD;
+function DecryptAes128(pbKey:PBYTE;dwKeyLen:DWORD;
 	pbSalt:PBYTE; dwSaltLen:DWORD;
 	pbData:PBYTE; dwDataLen:DWORD):boolean;
 
 procedure DumpHash(rid:DWORD; pbHash:PBYTE;dwlen:dword);
 
-procedure dumphex(description:string;bytes:lpbyte;len:byte;bcrlf:boolean=true);
+function dumphex(description:string;bytes:lpbyte;len:byte;bcrlf:boolean=true):string;
 
 
 implementation
@@ -135,7 +135,7 @@ begin
   result:= FALSE;
 end;
 
-function DecryptAes(pbKey:PBYTE;dwKeyLen:DWORD;
+function DecryptAes128(pbKey:PBYTE;dwKeyLen:DWORD;
 	pbSalt:PBYTE; dwSaltLen:DWORD;
 	pbData:PBYTE; dwDataLen:DWORD):boolean;
 const
@@ -165,8 +165,8 @@ begin
 		blob.hdr.bVersion := CUR_BLOB_VERSION;
 		blob.hdr.reserved := 0;
 		blob.hdr.aiKeyAlg := CALG_AES_128;
-		blob.dwKeySize := 16;
-		copymemory(@blob.bKey[0], pbKey, 16);
+		blob.dwKeySize := dwKeyLen;  //16
+		copymemory(@blob.bKey[0], pbKey, dwKeyLen); //16
                 //dumphex('key',@blob.bKey[0],blob.dwKeySize);
                 //dumphex('salt',pbSalt,dwSaltLen);
 		if CryptImportKey(hProv, @blob, sizeof(AES128_KEY_BLOB), 0, 0, hKey) then
@@ -222,13 +222,16 @@ begin
   result:= bResult;
 end;
 
-procedure dumphex(description:string;bytes:lpbyte;len:byte;bcrlf:boolean=true);
+function dumphex(description:string;bytes:lpbyte;len:byte;bcrlf:boolean=true):string;
 var
   c:byte;
+  tmp:string='';
 begin
+  result:='';
   if description<>'' then write(description+':');
-  for c:=0 to len-1 do write(inttohex(bytes[c],2));
-  if bcrlf=true then writeln;
+  for c:=0 to len-1 do tmp:=tmp+(inttohex(bytes[c],2));
+  result:=tmp;
+  if bcrlf=true then writeln(tmp) else write(tmp);
 end;
 
 function transformKey(InputKey:tbytes):tbytes;
@@ -386,7 +389,7 @@ begin
   if pSecret.wVersion=SECRET_CRYPT_TYPE_AES then
      begin
      offset:=4;
-     bret:=DecryptAes(@pekList.Data.entry, PEK_VALUE_LEN, @pSecret.bSalt[0],
+     bret:=DecryptAes128(@pekList.Data.entry, PEK_VALUE_LEN, @pSecret.bSalt[0],
                                PEK_SALT_LEN, @pSecret.pbData[offset], dwlen - sizeof(PEK_HDR)-offset); //60-24
      end;
   //writeln(bret);
