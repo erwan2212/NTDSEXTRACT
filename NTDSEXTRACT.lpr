@@ -28,7 +28,7 @@ const
   empty_lm:array[0..15] of byte=($aa,$d3,$b4,$35,$b5,$14,$04,$ee,$aa,$d3,$b4,$35,$b5,$14,$04,$ee);
   empty_nt:array[0..15] of byte=($31,$d6,$cf,$e0,$d1,$6a,$e9,$31,$b7,$3c,$59,$d7,$e0,$c0,$89,$c0);
 var
-  samName, description, path:array [0..255] of widechar;
+  samName, description, path, mail, displayname, givenName, telephoneNumber, temp:array [0..255] of widechar;
   lmHash, ntHash,lmHistory, ntHistory, sid:array [0..255] of byte;
   dwCount,rid, dwUsers, dwUserCtrl, ntHashes, lmHashes, dwHistory:dword;
   uacId, sidId, lmId, ntId, samId, descId, homeId, lmHistId, ntHistId: ulong;
@@ -145,18 +145,31 @@ begin
             write(':::');
             writeln;
 
+            GetColumnData(GetColumnId(ATT_MAIL), @temp[0], sizeof(temp));
+            mail:=strpas(temp);
+            GetColumnData(GetColumnId(ATT_DISPLAY_NAME), @temp[0], sizeof(temp));
+            displayname:=strpas(temp);
+            GetColumnData(GetColumnId(ATT_GIVEN_NAME), @temp[0], sizeof(temp));
+            givenName:=strpas(temp);
+            GetColumnData(GetColumnId(ATT_TELEPHONE_NUMBER), @temp[0], sizeof(temp));
+            telephoneNumber:=strpas(temp);
+
+
             try
-            WriteLn(F, 'dn: uid='+strpas(samname)+',ou=users,dc=domain,dc=com');
+            WriteLn(F, 'dn: CN='+strpas(samname)+',ou=users,dc=domain,dc=com');
             WriteLn(F, 'changetype: add');
-            WriteLn(F, '#objectClass: posixAccount');
-            WriteLn(F, 'objectClass: inetOrgPerson');
+            WriteLn(F, 'objectClass: user');
             WriteLn(F, 'cn: '+strpas(samname));
-            WriteLn(F, 'sn: '+strpas(samname));
-            WriteLn(F, 'uid: '+strpas(samname));
-            WriteLn(F, 'userPassword: '+userpassword);
+            WriteLn(F, '#uid: '+strpas(samname));
+            WriteLn(F, 'telephoneNumber: '+telephoneNumber);
+            WriteLn(F, 'givenName: '+givenName);
+            WriteLn(F, 'displayName: '+displayname);
+            WriteLn(F, 'mail: '+mail);
+            WriteLn(F, 'sambaNTPassword: '+userpassword);
+            WriteLn(F, 'userAccountControl: '+inttostr(dwUserCtrl));
             WriteLn(F, '#uidNumber: '+inttostr(rid));
-            WriteLn(F, '#gidNumber: '+inttostr(0));
-            WriteLn(F, '#homeDirectory: /home/'+strpas(samname));
+            //WriteLn(F, '#gidNumber: '+inttostr(0));
+            //WriteLn(F, '#homeDirectory: /home/'+strpas(samname));
             WriteLn(F, '');
             except
             end;
@@ -414,6 +427,13 @@ begin
     ret:=JetSetSystemParameterA (pinstance, JET_sesidNil, JET_paramRecovery, 0, pchar('Off'));
     if ret<>0 then raise exception.Create('JetSetSystemParameterA:'+inttohex(ret,8)) ;
 
+    // Initialize ESENT. Setting JET_paramCircularLog to 1 means ESENT will automatically
+    // delete unneeded logfiles. JetInit will inspect the logfiles to see if the last
+    // shutdown was clean. If it wasn't (e.g. the application crashed) recovery will be
+    // run automatically bringing the database to a consistent state.
+    //ret:=JetSetSystemParameterA(pinstance, JET_sesidNil, JET_paramCircularLog, 1, nil);
+    //if ret<>0 then raise exception.Create('JetSetSystemParameterA:'+inttohex(ret,8)) ;
+
     //https://github.com/microsoft/ManagedEsent/blob/master/EsentInterop/jet_param.cs
     //JET_paramEnableIndexChecking accepts JET_INDEXCHECKING (which is an enum). The values of '0' and '1' have the same meaning as before,
     // but '2' is JET_IndexCheckingDeferToOpenTable, which means that the NLS up-to-date-ness is NOT checked when the database is attached.
@@ -428,7 +448,7 @@ begin
 
     ret:=JetCreateInstanceA(pinstance,pchar('test'));
     if ret<>0 then raise exception.Create('JetCreateInstanceA:'+inttohex(ret,8)) ;
-    //writeln('JetCreateInstanceA');
+    //writeln('JetCreateInstanceA'); //before, was just before jetinit
 
     ret:=JetInit(pinstance);
     if ret<>0 then raise exception.Create('JetInit:'+inttohex(ret,8)) ;
@@ -459,6 +479,78 @@ begin
 
 end;
 
+{
+    procedure PerformBackup(instance: JET_INSTANCE; backupPath: PChar);
+    var
+      jetErr: JET_API;
+      grbit: JET_GRBIT;
+      backupFile: JET_HANDLE;
+    begin
+      grbit := JET_bitBackupSnapshot; //JET_bitBackupSnapshot; //JET_bitBackupAtomic;
+
+      // Initialiser l'API ESENT
+      jetErr := JetCreateInstanceA(instance, 'BackupInstance');
+      if jetErr <> JET_errSuccess then
+      begin
+        Writeln('Erreur lors de la création de l''instance: ', jetErr);
+        Exit;
+      end;
+
+      // Démarrer l'instance
+      jetErr := JetInit(instance);
+      if jetErr <> JET_errSuccess then
+      begin
+        Writeln('Erreur lors de l''initialisation de l''instance: ', jetErr);
+        Exit;
+      end;
+
+      // Démarrer une opération de sauvegarde
+      jetErr := JetBeginExternalBackupInstance(instance, grbit);
+      if jetErr <> JET_errSuccess then
+      begin
+        Writeln('Erreur lors du démarrage de la sauvegarde: ', jetErr);
+        Exit;
+      end;
+
+      // Créer le fichier de sauvegarde
+      jetErr := JetOpenFile(backupPath, backupFile, nil,nil);
+      if jetErr <> JET_errSuccess then
+      begin
+        Writeln('Erreur lors de l''ouverture du fichier de sauvegarde: ', jetErr);
+        Exit;
+      end;
+
+      // Effectuer la sauvegarde
+      jetErr := JetReadFile(backupFile, nil, 0, nil);
+      if jetErr <> JET_errSuccess then
+      begin
+        Writeln('Erreur lors de la lecture du fichier de sauvegarde: ', jetErr);
+        Exit;
+      end;
+
+      // Terminer l'opération de sauvegarde
+      jetErr := JetEndExternalBackupInstance(instance);
+      if jetErr <> JET_errSuccess then
+      begin
+        Writeln('Erreur lors de la terminaison de la sauvegarde: ', jetErr);
+        Exit;
+      end;
+
+      // Fermer le fichier de sauvegarde
+      jetErr := JetCloseFile(backupFile);
+      if jetErr <> JET_errSuccess then
+      begin
+        Writeln('Erreur lors de la fermeture du fichier de sauvegarde: ', jetErr);
+        Exit;
+      end;
+
+      // Terminer l'instance
+      JetTerm(instance);
+
+      Writeln('Sauvegarde effectuée avec succès!');
+    end;
+}
+
 procedure main;
 var
   ret:JET_API;
@@ -479,8 +571,11 @@ begin
 
   if paramcount>=1 then
      begin
-     syskey:=HexaStringToByte2(paramstr(1));
-     dumphex('syskey',@syskey[0],length(syskey));
+     //if length(paramstr(1))=32 then
+        begin
+        syskey:=HexaStringToByte2(paramstr(1));
+        dumphex('syskey',@syskey[0],length(syskey));
+        end;
      end;
 
   if paramcount>=2
@@ -495,6 +590,9 @@ begin
 
  try
 
+// if ParamStr (1)='1' then PerformBackup(pinstance,'ntds.bak');
+
+ if FileExists (filename) then
  if open(pchar(filename))=true then
  begin
 
