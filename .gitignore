@@ -4,3 +4,10 @@ lib*
 *.dit
 system
 security
+*.txt
+*.log
+*.edb
+*.raw
+*.jrs
+*.chk
+*.ldif

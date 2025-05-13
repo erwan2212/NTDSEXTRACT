@@ -7,7 +7,7 @@
 //compilation optimization level >1 will mess up results ???
 program project1;
 
-uses windows, sysutils, math, esent, JwaWinCrypt, jwanative,ntds, utils{,jwawintype,jwabcrypt};
+uses windows, sysutils, math, esent, JwaWinCrypt, jwanative,ntds, utils,base64{,jwawintype,jwabcrypt};
 
 function ConvertSidToStringSidA(SID: PSID; var StringSid: pchar): Boolean; stdcall;
     external 'advapi32.dll';// name 'ConvertSidToStringSidA';
@@ -156,16 +156,22 @@ begin
 
 
             try
-            WriteLn(F, 'dn: CN='+strpas(samname)+',ou=users,dc=domain,dc=com');
-            WriteLn(F, 'changetype: add');
-            WriteLn(F, 'objectClass: user');
+            WriteLn(F, 'dn: CN='+strpas(samname)+',ou=People,dc=my-domain,dc=com');
+            //WriteLn(F, 'changetype: add'); //pour ldapmodify
+            //WriteLn(F, 'objectClass: user');
+            WriteLn(F, 'objectClass: top');
+            WriteLn(F, 'objectClass: person');
+            WriteLn(F, 'objectClass: organizationalPerson');
+            WriteLn(F, 'objectClass: inetOrgPerson');
+            WriteLn(F, 'objectClass: user'); //needed for unicodePwd & userAccountControl
             WriteLn(F, 'cn: '+strpas(samname));
-            WriteLn(F, '#uid: '+strpas(samname));
-            WriteLn(F, 'telephoneNumber: '+telephoneNumber);
-            WriteLn(F, 'givenName: '+givenName);
-            WriteLn(F, 'displayName: '+displayname);
-            WriteLn(F, 'mail: '+mail);
-            WriteLn(F, 'sambaNTPassword: '+userpassword);
+            WriteLn(F, 'sn: '+strpas(samname));
+            //WriteLn(F, '#uid: '+strpas(samname));
+            if telephoneNumber<>'' then WriteLn(F, 'telephoneNumber: '+telephoneNumber);
+            if givenName<>'' then WriteLn(F, 'givenName: '+ {EncodeStringBase64}(givenName)); //ASCII-clean (see RFC 2849) using :: base64value
+            if displayName<>'' then WriteLn(F, 'displayName: '+ {EncodeStringBase64}(displayname)); //ASCII-clean (see RFC 2849) using :: base64value
+            if mail<>'' then WriteLn(F, 'mail: '+mail);
+            WriteLn(F, 'unicodePwd: '+userpassword);
             WriteLn(F, 'userAccountControl: '+inttostr(dwUserCtrl));
             WriteLn(F, '#uidNumber: '+inttostr(rid));
             //WriteLn(F, '#gidNumber: '+inttostr(0));

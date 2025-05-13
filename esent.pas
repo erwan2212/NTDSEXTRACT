@@ -34,6 +34,10 @@ const
   JET_MoveNext=1;
   JET_cbNameMost=64; //128 if unicode
   JET_bitTableSequential=  $00008000;
+  JET_bitBackupAtomic= $00000004;
+  JET_bitBackupIncremental=$00000001;
+  JET_bitBackupSnapshot=$00000010;
+  JET_paramCircularLog= 17;
 
 type
 JET_API = nativeuint;
@@ -137,6 +141,12 @@ var
     JetTerm:Function(instance:JET_INSTANCE ): JET_API; stdcall;
     JetGetSystemParameterA:Function(instance:JET_INSTANCE;sesid:JET_SESID;paramid:ulong;var plParam:JET_API_PTR;szParam:JET_PSTR;cbMax:ulong): JET_API; stdcall;
     JetSetSystemParameterA:Function(var pinstance:JET_INSTANCE;sesid:JET_SESID;paramid:ulong;lParam:JET_API_PTR;szParam:JET_PCSTR): JET_API; stdcall;
+    JetBeginExternalBackupInstance:function(instance:JET_INSTANCE; grbit:JET_GRBIT): JET_API; stdcall;
+    JetOpenFile:function(szFileName:pansichar;var phfFile:JET_HANDLE; pulFileSizeLow:plong; pulFileSizeHigh:plong): JET_API; stdcall;
+    JetReadFile:function(hfFile:JET_HANDLE;pv:pointer;cb:ulong;pcbActual:pulong): JET_API; stdcall;
+    JetEndExternalBackupInstance:function(instance:JET_INSTANCE): JET_API; stdcall;
+    JetCloseFile:function(hfFile:JET_HANDLE): JET_API; stdcall;
+
 
 implementation
 
@@ -205,6 +215,11 @@ begin
   JetTerm:= GetProcAddress(lib, 'JetTerm');
   JetGetSystemParameterA:= GetProcAddress(lib, 'JetGetSystemParameterA');
   JetSetSystemParameterA:= GetProcAddress(lib, 'JetSetSystemParameterA');
+  JetBeginExternalBackupInstance:=GetProcAddress(lib, 'JetBeginExternalBackupInstance');
+  JetOpenFile:=GetProcAddress(lib, 'JetOpenFileA');
+  JetReadFile:=GetProcAddress(lib, 'JetReadFile');
+  JetEndExternalBackupInstance:=GetProcAddress(lib, 'JetEndExternalBackupInstance');
+  JetCloseFile:=GetProcAddress(lib, 'JetCloseFile');
   Result := True;
 end;
 end;

@@ -45,8 +45,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="project1"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="152"/>
-        <CursorPos X="58" Y="169"/>
+        <TopLine Value="151"/>
+        <CursorPos X="82" Y="171"/>
         <UsageCount Value="203"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -54,7 +54,7 @@
       <Unit1>
         <Filename Value="esent.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <TopLine Value="97"/>
         <CursorPos X="10" Y="114"/>
         <UsageCount Value="203"/>
@@ -64,7 +64,7 @@
       <Unit2>
         <Filename Value="ntds.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="2"/>
         <TopLine Value="26"/>
         <CursorPos X="25" Y="29"/>
         <UsageCount Value="203"/>
@@ -74,140 +74,140 @@
       <Unit3>
         <Filename Value="utils.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="4"/>
         <CursorPos X="3" Y="4"/>
         <UsageCount Value="203"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit3>
       <Unit4>
-        <Filename Value="C:\FPC\3.0.0\source\rtl\win\wininc\func.inc"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="322"/>
-        <CursorPos X="10" Y="334"/>
-        <UsageCount Value="7"/>
+        <Filename Value="C:\FPC\3.0.0\source\packages\fcl-base\src\base64.pp"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="432"/>
+        <CursorPos X="28" Y="449"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit4>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="NTDSEXTRACT.lpr"/>
-        <Caret Line="495" Column="57" TopLine="480"/>
-      </Position1>
-      <Position2>
         <Filename Value="esent.pas"/>
         <Caret Line="142" Column="110" TopLine="127"/>
-      </Position2>
-      <Position3>
+      </Position1>
+      <Position2>
         <Filename Value="NTDSEXTRACT.lpr"/>
         <Caret Line="495" Column="41" TopLine="480"/>
+      </Position2>
+      <Position3>
+        <Filename Value="esent.pas"/>
+        <Caret Line="143" Column="9" TopLine="127"/>
       </Position3>
       <Position4>
         <Filename Value="esent.pas"/>
-        <Caret Line="143" Column="9" TopLine="127"/>
+        <Caret Line="214" Column="48" TopLine="197"/>
       </Position4>
       <Position5>
         <Filename Value="esent.pas"/>
-        <Caret Line="214" Column="48" TopLine="197"/>
+        <Caret Line="217" Column="82" TopLine="190"/>
       </Position5>
       <Position6>
         <Filename Value="esent.pas"/>
-        <Caret Line="217" Column="82" TopLine="190"/>
+        <Caret Line="144" Column="42" TopLine="129"/>
       </Position6>
       <Position7>
-        <Filename Value="esent.pas"/>
-        <Caret Line="144" Column="42" TopLine="129"/>
+        <Filename Value="NTDSEXTRACT.lpr"/>
+        <Caret Line="568" Column="41" TopLine="41"/>
       </Position7>
       <Position8>
         <Filename Value="NTDSEXTRACT.lpr"/>
-        <Caret Line="568" Column="41" TopLine="41"/>
+        <Caret Line="403" Column="10" TopLine="388"/>
       </Position8>
       <Position9>
-        <Filename Value="NTDSEXTRACT.lpr"/>
-        <Caret Line="403" Column="10" TopLine="388"/>
-      </Position9>
-      <Position10>
         <Filename Value="esent.pas"/>
         <Caret Line="118" Column="14" TopLine="103"/>
+      </Position9>
+      <Position10>
+        <Filename Value="NTDSEXTRACT.lpr"/>
+        <Caret Line="552" Column="14" TopLine="547"/>
       </Position10>
       <Position11>
         <Filename Value="NTDSEXTRACT.lpr"/>
-        <Caret Line="552" Column="14" TopLine="547"/>
+        <Caret Line="468" Column="39" TopLine="455"/>
       </Position11>
       <Position12>
         <Filename Value="NTDSEXTRACT.lpr"/>
-        <Caret Line="468" Column="39" TopLine="455"/>
+        <Caret Line="571" Column="3" TopLine="545"/>
       </Position12>
       <Position13>
         <Filename Value="NTDSEXTRACT.lpr"/>
-        <Caret Line="571" Column="3" TopLine="545"/>
+        <Caret Line="532" Column="2" TopLine="507"/>
       </Position13>
       <Position14>
         <Filename Value="NTDSEXTRACT.lpr"/>
-        <Caret Line="532" Column="2" TopLine="507"/>
+        <Caret Line="554" Column="29" TopLine="537"/>
       </Position14>
       <Position15>
         <Filename Value="NTDSEXTRACT.lpr"/>
-        <Caret Line="554" Column="29" TopLine="537"/>
+        <Caret Line="421" Column="6" TopLine="410"/>
       </Position15>
       <Position16>
         <Filename Value="NTDSEXTRACT.lpr"/>
-        <Caret Line="421" Column="6" TopLine="410"/>
+        <Caret Line="425" Column="42" TopLine="410"/>
       </Position16>
       <Position17>
-        <Filename Value="NTDSEXTRACT.lpr"/>
-        <Caret Line="425" Column="42" TopLine="410"/>
-      </Position17>
-      <Position18>
         <Filename Value="esent.pas"/>
         <Caret Line="40" Column="28" TopLine="22"/>
+      </Position17>
+      <Position18>
+        <Filename Value="NTDSEXTRACT.lpr"/>
+        <Caret Line="438" Column="74" TopLine="413"/>
       </Position18>
       <Position19>
         <Filename Value="NTDSEXTRACT.lpr"/>
-        <Caret Line="438" Column="74" TopLine="413"/>
+        <Caret Line="600" Column="14" TopLine="591"/>
       </Position19>
       <Position20>
         <Filename Value="NTDSEXTRACT.lpr"/>
-        <Caret Line="600" Column="14" TopLine="591"/>
+        <Caret Line="52" Column="24" TopLine="36"/>
       </Position20>
       <Position21>
-        <Filename Value="NTDSEXTRACT.lpr"/>
-        <Caret Line="26" Column="10" TopLine="35"/>
+        <Filename Value="ntds.pas"/>
+        <Caret Line="40" TopLine="28"/>
       </Position21>
       <Position22>
-        <Filename Value="NTDSEXTRACT.lpr"/>
-        <Caret Line="52" Column="24" TopLine="36"/>
+        <Filename Value="ntds.pas"/>
+        <Caret Line="39" TopLine="28"/>
       </Position22>
       <Position23>
         <Filename Value="ntds.pas"/>
-        <Caret Line="40" TopLine="28"/>
+        <Caret Line="56" Column="34" TopLine="28"/>
       </Position23>
       <Position24>
         <Filename Value="ntds.pas"/>
-        <Caret Line="39" TopLine="28"/>
+        <Caret Line="43" TopLine="26"/>
       </Position24>
       <Position25>
         <Filename Value="ntds.pas"/>
-        <Caret Line="56" Column="34" TopLine="28"/>
+        <Caret Line="48" TopLine="31"/>
       </Position25>
       <Position26>
         <Filename Value="ntds.pas"/>
-        <Caret Line="43" TopLine="26"/>
+        <Caret Line="49" TopLine="26"/>
       </Position26>
       <Position27>
-        <Filename Value="ntds.pas"/>
-        <Caret Line="48" TopLine="31"/>
+        <Filename Value="NTDSEXTRACT.lpr"/>
+        <Caret Line="95" Column="55" TopLine="78"/>
       </Position27>
       <Position28>
-        <Filename Value="ntds.pas"/>
-        <Caret Line="49" TopLine="26"/>
+        <Filename Value="NTDSEXTRACT.lpr"/>
+        <Caret Line="169" Column="55" TopLine="152"/>
       </Position28>
       <Position29>
         <Filename Value="NTDSEXTRACT.lpr"/>
-        <Caret Line="95" Column="55" TopLine="78"/>
+        <Caret Line="10" Column="79"/>
       </Position29>
       <Position30>
-        <Filename Value="NTDSEXTRACT.lpr"/>
-        <Caret Line="169" Column="55" TopLine="152"/>
+        <Filename Value="C:\FPC\3.0.0\source\packages\fcl-base\src\base64.pp"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>
