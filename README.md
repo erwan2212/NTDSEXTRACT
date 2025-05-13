@@ -7,4 +7,4 @@
  You can dump all necessary files (registry hives and ntds database) with<br/>
  powershell "ntdsutil.exe 'ac i ntds' 'ifm' 'create full c:\temp' q q"<br/>
  <br/>
- check this out with esentutl /g ntds.dit and repait it with esentutl /p ntds.dit.<br/>
+ check the database with esentutl /g ntds.dit and repair it with esentutl /p ntds.dit.<br/>
